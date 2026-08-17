@@ -126,8 +126,16 @@
 
   /* ---------- LAYOUT ---------- */
   main{flex:1;display:grid;grid-template-columns:1.6fr 1fr;gap:1px;background:var(--line);min-height:0;overflow:hidden;}
-  @media(max-width:1000px){main{grid-template-columns:1fr;}}
   section.panel{background:var(--panel);padding:18px 22px 22px;min-height:0;}
+  @media(max-width:1000px){
+    main{grid-template-columns:1fr;}
+    /* Di bawah 1000px, header+tab+KPI bisa lebih tinggi dari layar (apalagi HP dengan address bar) —
+       jadi shell 100vh/overflow:hidden diganti scroll halaman biasa supaya peta & panel di bawahnya tidak terpotong. */
+    body{height:auto;min-height:100vh;overflow-y:auto;overflow-x:hidden;}
+    main{overflow:visible;min-height:0;}
+    section.panel{overflow-y:visible;}
+    .biz-analysis{overflow-y:visible;}
+  }
 
   /* ---------- VIEW SWITCH ---------- */
   .view-switch{display:flex;gap:1px;background:var(--line);border-bottom:1px solid var(--line);flex-shrink:0;overflow-x:auto;}
