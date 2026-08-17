@@ -35,6 +35,10 @@
     --text:#eceef2;
     --text-dim:#8891a0;
     --text-faint:#4c5464;
+    --c-kopi:var(--amber);
+    --c-mobil:#4ea8ff;
+    --c-sepeda:#2dd4c8;
+    --c-motor:#b47dff;
   }
   :root[data-theme="light"]{
     --void:#eef0f3;
@@ -54,6 +58,10 @@
     --text:#1a1d23;
     --text-dim:#5b6270;
     --text-faint:#828a99;
+    --c-kopi:var(--amber);
+    --c-mobil:#1f6fd6;
+    --c-sepeda:#0f8f83;
+    --c-motor:#7c3fbf;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{background:var(--void);color:var(--text);font-family:'IBM Plex Sans',sans-serif;height:100%;}
@@ -177,6 +185,54 @@
     .tgt-label{width:100%;}
     .tgt-bar{order:3;width:100%;flex-basis:100%;}
     .tgt-pct{width:auto;margin-left:auto;}
+  }
+
+  /* ---------- BIZ ROW 2-COL: DONUT + TOP LOKASI ---------- */
+  .biz-row-2col{display:grid;grid-template-columns:minmax(260px,340px) 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:900px){ .biz-row-2col{grid-template-columns:1fr;} }
+  .biz-donut-card,.biz-toplok-card,.biz-monthly-card,.biz-activity-card{border:1px solid var(--line);background:var(--panel-alt);padding:16px 18px;}
+  .biz-monthly-card,.biz-activity-card{margin-bottom:14px;}
+  .donut-wrap{position:relative;width:160px;height:160px;margin:10px auto 4px;}
+  .donut-svg{width:100%;height:100%;display:block;}
+  .donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;}
+  .donut-center span{display:block;}
+  .donut-center .dt-label{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text-faint);letter-spacing:.05em;margin-bottom:3px;}
+  .donut-center .dt-val{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;}
+  .donut-legend{display:flex;flex-direction:column;gap:7px;margin-top:12px;}
+  .donut-legend span{display:flex;align-items:center;gap:8px;font-size:11.5px;}
+  .donut-legend i{width:10px;height:10px;border-radius:2px;flex-shrink:0;display:inline-block;}
+  .donut-legend b{margin-left:auto;font-family:'IBM Plex Mono',monospace;color:var(--text-dim);}
+  .toplok-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line);}
+  .toplok-row:first-child{border-top:none;}
+  .toplok-label{display:flex;align-items:center;gap:7px;width:190px;flex-shrink:0;font-size:11.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .toplok-label img{height:14px;width:auto;max-width:40px;object-fit:contain;}
+  .toplok-bar{flex:1;height:6px;background:var(--line);border-radius:3px;position:relative;overflow:hidden;min-width:50px;}
+  .toplok-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:3px;}
+  .toplok-val{width:110px;flex-shrink:0;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-dim);white-space:nowrap;}
+  @media(max-width:640px){
+    .toplok-row{flex-wrap:wrap;}
+    .toplok-label{width:100%;}
+    .toplok-bar{order:3;width:100%;flex-basis:100%;}
+    .toplok-val{width:auto;margin-left:auto;}
+  }
+  .monthly-svg{width:100%;height:170px;display:block;margin-top:6px;}
+  .monthly-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--text-dim);}
+  .monthly-legend span{display:flex;align-items:center;gap:6px;}
+  .monthly-legend i{width:9px;height:9px;flex-shrink:0;display:inline-block;border-radius:2px;}
+  .activity-table{display:flex;flex-direction:column;margin-top:4px;}
+  .activity-row{display:grid;grid-template-columns:70px 1fr 1.4fr 90px;gap:12px;align-items:center;padding:9px 0;border-top:1px solid var(--line);font-size:11.5px;}
+  .activity-row:first-child{border-top:none;}
+  .act-time{color:var(--text-faint);font-size:10px;}
+  .act-name{display:flex;align-items:center;gap:7px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .act-name img{height:14px;width:auto;max-width:36px;object-fit:contain;}
+  .act-note{color:var(--text-dim);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .act-badge{justify-self:end;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.04em;padding:3px 8px;border-radius:2px;white-space:nowrap;}
+  .ab-pos{color:var(--green);background:var(--green-dim);}
+  .ab-neg{color:var(--red);background:var(--red-dim);}
+  .ab-flat{color:var(--yellow);background:var(--yellow-dim);}
+  @media(max-width:700px){
+    .activity-row{grid-template-columns:1fr;gap:3px;}
+    .act-badge{justify-self:start;}
   }
   .map-panel{overflow-y:auto;}
   .side-panel{overflow-y:auto;}
@@ -475,6 +531,35 @@
     <div id="target-rows"></div>
   </div>
 
+  <div class="biz-row-2col">
+    <div class="biz-donut-card">
+      <div class="biz-card-head"><h3 id="donut-title">KONTRIBUSI OMZET PER JENIS USAHA</h3></div>
+      <div class="donut-wrap">
+        <svg id="donut-svg" viewBox="0 0 160 160" class="donut-svg"></svg>
+        <div class="donut-center"><span class="dt-label" id="donut-total-label">TOTAL OMZET</span><span class="dt-val" id="donut-total-val">—</span></div>
+      </div>
+      <div class="donut-legend" id="donut-legend"></div>
+    </div>
+    <div class="biz-toplok-card">
+      <div class="biz-card-head"><h3 id="toplok-title">TOP LOKASI BERDASARKAN OMZET</h3></div>
+      <div id="toplok-rows"></div>
+    </div>
+  </div>
+
+  <div class="biz-monthly-card">
+    <div class="biz-card-head"><h3 id="monthly-title">OMZET BULANAN PER JENIS USAHA (6 BULAN TERAKHIR)</h3></div>
+    <svg id="monthly-chart-svg" viewBox="0 0 620 170" preserveAspectRatio="none" class="monthly-svg"></svg>
+    <div class="monthly-legend" id="monthly-legend"></div>
+  </div>
+
+  <div class="biz-activity-card">
+    <div class="biz-card-head">
+      <h3 id="activity-title">AKTIVITAS TERBARU</h3>
+      <span class="bz-tag" id="activity-tag"></span>
+    </div>
+    <div class="activity-table" id="activity-table"></div>
+  </div>
+
   <div class="biz-grid" id="biz-grid"></div>
 </section>
 
@@ -560,6 +645,10 @@ const STR = {
     targetTitle:'TARGET VS REALISASI PER JENIS USAHA',
     targetDesc:'Pencapaian omzet aktual terhadap target bulanan — data simulasi, siap disambungkan ke data target asli.',
     targetAchieved:'Tercapai', targetBelow:'Di Bawah Target',
+    donutTitle:'KONTRIBUSI OMZET PER JENIS USAHA', donutTotalLabel:'TOTAL OMZET',
+    toplokTitle:'TOP LOKASI BERDASARKAN OMZET',
+    monthlyTitle:'OMZET BULANAN PER JENIS USAHA (6 BULAN TERAKHIR)',
+    activityTitle:'AKTIVITAS TERBARU', activityAgo:(n)=>`${n} menit lalu`,
   },
   en: {
     brandSub: 'SENJA BUSINESS GROUP — NATIONAL BUSINESS PERFORMANCE MONITORING',
@@ -610,6 +699,10 @@ const STR = {
     targetTitle:'TARGET VS ACTUAL PER BUSINESS TYPE',
     targetDesc:'Actual revenue achievement against monthly target — simulated data, ready to connect to real target data.',
     targetAchieved:'Achieved', targetBelow:'Below Target',
+    donutTitle:'REVENUE CONTRIBUTION BY BUSINESS TYPE', donutTotalLabel:'TOTAL REVENUE',
+    toplokTitle:'TOP LOCATIONS BY REVENUE',
+    monthlyTitle:'MONTHLY REVENUE BY BUSINESS TYPE (LAST 6 MONTHS)',
+    activityTitle:'RECENT ACTIVITY', activityAgo:(n)=>`${n} min ago`,
   }
 };
 
@@ -829,6 +922,124 @@ function renderTargetVsActual(){
     `;
   }).join('');
   document.getElementById('target-rows').innerHTML = rows;
+}
+
+/* ===================== KONTRIBUSI OMZET PER JENIS USAHA (donut) ===================== */
+const TYPE_COLOR = { kopi:'var(--c-kopi)', mobil:'var(--c-mobil)', sepeda:'var(--c-sepeda)', motor:'var(--c-motor)' };
+function renderDonut(){
+  const S = STR[lang];
+  document.getElementById('donut-title').textContent = S.donutTitle;
+  document.getElementById('donut-total-label').textContent = S.donutTotalLabel;
+  const parts = businessTypes.map(t=>({
+    t, omzet: stores.filter(s=>s.type===t.id).reduce((a,s)=>a+s.omzet,0)
+  }));
+  const total = parts.reduce((a,p)=>a+p.omzet,0) || 1;
+  const r=60, cx=80, cy=80, sw=20;
+  const circumference = 2*Math.PI*r;
+  let offset = 0;
+  const segs = parts.map(p=>{
+    const frac = p.omzet/total;
+    const len = frac*circumference;
+    const seg = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${TYPE_COLOR[p.t.id]}" stroke-width="${sw}" stroke-dasharray="${len.toFixed(2)} ${(circumference-len).toFixed(2)}" stroke-dashoffset="${(-offset).toFixed(2)}" transform="rotate(-90 ${cx} ${cy})"></circle>`;
+    offset += len;
+    return seg;
+  }).join('');
+  document.getElementById('donut-svg').innerHTML = segs;
+  document.getElementById('donut-total-val').textContent = fmtCompact(total);
+  document.getElementById('donut-legend').innerHTML = parts.map(p=>{
+    const pct = total ? Math.round(p.omzet/total*100) : 0;
+    return `<span><i style="background:${TYPE_COLOR[p.t.id]}"></i>${typeLabel(p.t)}<b>${pct}%</b></span>`;
+  }).join('');
+}
+
+/* ===================== TOP LOKASI BERDASARKAN OMZET (mengikuti filter jenis usaha aktif) ===================== */
+function renderTopLokasi(){
+  const S = STR[lang];
+  document.getElementById('toplok-title').textContent = S.toplokTitle;
+  const list = currentStores().sort((a,b)=>b.omzet-a.omzet).slice(0,6);
+  const el = document.getElementById('toplok-rows');
+  if(!list.length){ el.innerHTML = `<div class="rank-empty">${S.noResult}</div>`; return; }
+  const max = list[0].omzet || 1;
+  el.innerHTML = list.map(s=>{
+    const t = typeById[s.type];
+    const pct = Math.round(s.omzet/max*100);
+    return `
+      <div class="toplok-row">
+        <div class="toplok-label">${t.logo ? `<img src="${t.logo}" alt="">` : `<span>${t.icon}</span>`}${s.name}</div>
+        <div class="toplok-bar"><i style="width:${pct}%;background:${TYPE_COLOR[t.id]}"></i></div>
+        <div class="toplok-val">Rp${s.omzet.toLocaleString(locale())}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+/* ===================== OMZET BULANAN PER JENIS USAHA (6 bulan terakhir, proporsional dari kontribusi saat ini) ===================== */
+function renderMonthlyByType(){
+  const S = STR[lang];
+  document.getElementById('monthly-title').textContent = S.monthlyTitle;
+  const months = TREND_MONTHS[lang].slice(-6);
+  const data = TREND_DATA.slice(-6);
+  const shareBase = businessTypes.map(t=>({ id:t.id, omzet: stores.filter(s=>s.type===t.id).reduce((a,s)=>a+s.omzet,0) }));
+  const totalShare = shareBase.reduce((a,x)=>a+x.omzet,0) || 1;
+  const shares = Object.fromEntries(shareBase.map(x=>[x.id, x.omzet/totalShare]));
+
+  const W=620, H=170, padB=18, padT=8;
+  const chartH = H-padB-padT;
+  const n = data.length;
+  const groupW = W/n;
+  const groupPad = groupW*0.12;
+  const innerW = groupW - groupPad*2;
+  const barW = innerW/businessTypes.length;
+  const maxVal = Math.max(...data.map(d=> Math.max(...businessTypes.map(t=>d.omzet*shares[t.id])))) || 1;
+
+  let bars = '';
+  data.forEach((d,i)=>{
+    businessTypes.forEach((t,j)=>{
+      const val = d.omzet * shares[t.id];
+      const h = (val/maxVal)*chartH;
+      const x = i*groupW + groupPad + j*barW;
+      const y = H-padB-h;
+      bars += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${(barW*0.8).toFixed(1)}" height="${h.toFixed(1)}" rx="1.5" fill="${TYPE_COLOR[t.id]}"></rect>`;
+    });
+  });
+  const labels = months.map((m,i)=>{
+    const x = i*groupW + groupW/2;
+    return `<text x="${x.toFixed(1)}" y="${H-4}" font-size="8" fill="var(--text-faint)" text-anchor="middle" font-family="'IBM Plex Mono',monospace">${m}</text>`;
+  }).join('');
+  document.getElementById('monthly-chart-svg').innerHTML = bars + labels;
+  document.getElementById('monthly-legend').innerHTML = businessTypes.map(t=>
+    `<span><i style="background:${TYPE_COLOR[t.id]}"></i>${typeLabel(t)}</span>`
+  ).join('');
+}
+
+/* ===================== AKTIVITAS TERBARU (feed simulasi, mengikuti filter jenis usaha aktif) ===================== */
+function renderActivityFeed(){
+  const S = STR[lang];
+  document.getElementById('activity-title').textContent = S.activityTitle;
+  document.getElementById('activity-tag').textContent = S.bizSampleTag;
+  const list = currentStores();
+  const el = document.getElementById('activity-table');
+  if(!list.length){ el.innerHTML = `<div style="padding:14px 4px;color:var(--text-faint);font-size:12px;">${S.noResult}</div>`; return; }
+  const sorted = list.slice().sort((a,b)=>b.profit-a.profit);
+  const picks = [];
+  const seen = new Set();
+  const addPick = s=>{ if(s && !seen.has(s.name)){ picks.push(s); seen.add(s.name); } };
+  sorted.slice(0,3).forEach(addPick);
+  list.filter(s=>s.status==='impas').slice(0,2).forEach(addPick);
+  sorted.slice(-3).forEach(addPick);
+  const agoMinutes = [4,18,32,47,58,76,95,120];
+  el.innerHTML = picks.slice(0,8).map((s,i)=>{
+    const t = typeById[s.type];
+    const badgeClass = s.status==='profit'?'ab-pos':s.status==='rugi'?'ab-neg':'ab-flat';
+    return `
+      <div class="activity-row">
+        <span class="act-time mono">${S.activityAgo(agoMinutes[i] ?? (i+1)*15)}</span>
+        <span class="act-name">${t.logo ? `<img src="${t.logo}" alt="">` : `<span>${t.icon}</span>`}${s.name}</span>
+        <span class="act-note">${lang==='id' ? s.note : s.note_en}</span>
+        <span class="act-badge ${badgeClass}">${S.ftab[s.status]}</span>
+      </div>
+    `;
+  }).join('');
 }
 
 /* ===================== HELP MODAL CONTENT ===================== */
@@ -1466,6 +1677,10 @@ function renderAll(){
   renderBizAnalysis();
   renderTrendChart();
   renderTargetVsActual();
+  renderDonut();
+  renderTopLokasi();
+  renderMonthlyByType();
+  renderActivityFeed();
 }
 
 /* ===================== THEME & LANGUAGE TOGGLES ===================== */
@@ -1554,8 +1769,25 @@ window.addEventListener('mouseup', ()=>{
   if(mapIsPanning){ mapIsPanning = false; svg.classList.remove('dragging'); }
 });
 
-fetch('https://raw.githubusercontent.com/denyherianto/indonesia-geojson-topojson-maps-with-38-provinces/main/GeoJSON/indonesia-38-provinces.geojson')
-  .then(r=>r.json())
+const GEOJSON_URL = 'https://cdn.jsdelivr.net/gh/denyherianto/indonesia-geojson-topojson-maps-with-38-provinces@main/GeoJSON/indonesia-38-provinces.geojson';
+const GEOJSON_CACHE_KEY = 'senjaGeoJsonCache_v1';
+function loadGeoJson(){
+  return fetch(GEOJSON_URL)
+    .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(geo=>{
+      try{ localStorage.setItem(GEOJSON_CACHE_KEY, JSON.stringify(geo)); }catch(e){}
+      return geo;
+    })
+    .catch(err=>{
+      try{
+        const cached = localStorage.getItem(GEOJSON_CACHE_KEY);
+        if(cached) return JSON.parse(cached);
+      }catch(e){}
+      throw err;
+    });
+}
+
+loadGeoJson()
   .then(geo=>{
     let lonMin=180, lonMax=-180, latMin=90, latMax=-90;
     function scanCoords(coords, depth){
